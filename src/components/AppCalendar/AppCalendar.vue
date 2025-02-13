@@ -6,6 +6,7 @@
         :options="options"
         :label="$t('calendar.select.label')"
         :placeholder="$t('calendar.select.placeholder')"
+        @update:model-value="onSelectChange"
       />
     </div>
 
@@ -17,6 +18,7 @@
         type="number"
         :label="$t('calendar.numeric.label')"
         :placeholder="$t('calendar.numeric.placeholder')"
+        @update:model-value="dispatchCalendarEvent"
       />
     </div>
 
@@ -28,6 +30,7 @@
         :min="minDate"
         :max="maxDate"
         :error="errors.dateFrom"
+        @update:model-value="onDateChange"
       />
     </div>
 
@@ -39,6 +42,7 @@
         :min="minDate"
         :max="maxDate"
         :error="errors.dateTo"
+        @update:model-value="onDateChange"
       />
     </div>
 
@@ -55,7 +59,7 @@ import AppDatePicker from '@/components/common/AppDatePicker.vue';
 
 import type { CalendarOption, CalendarEvent } from '@/types'
 import { CALENDAR_TIME_UNITS, CALENDAR_DATE_UNITS } from '@/constants/calendar'
-import { ref, computed, watchEffect, watch, nextTick } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n';
 
 const emit = defineEmits<{
@@ -82,14 +86,10 @@ const selectedOption = ref<CalendarOption>('year')
 const numericValue = ref<number>(props.minValue || 1);
 const dateFrom = ref<string>('');
 const dateTo = ref<string>('');
-const isResetting = ref<boolean>(false);
 const errors = ref<Record<string, boolean>>({
   dateFrom: false,
   dateTo: false,
 })
-
-// TODO: Define type & structure for data later
-// const value = ref(null)
 
 const mapOptionToLabel = (option: CalendarOption) => {
   return t.t(`calendar.${option}`);
@@ -125,22 +125,19 @@ const validateDates = () => {
       errors.value.dateTo = true;
     }
   }
+
+  return errors.value;
 }
 
 const resetValues = () => {
-  isResetting.value = true;
   numericValue.value = props.minValue || 1;
   dateFrom.value = '';
   dateTo.value = '';
   errors.value.dateFrom = false;
   errors.value.dateTo = false;
-
-  nextTick(() => {
-    isResetting.value = false;
-  });
 }
 
-const emitEvent = () => {
+const dispatchCalendarEvent = () => {
   const payload: CalendarEvent = {
     type: selectedOption.value,
     value: {},
@@ -164,6 +161,15 @@ const emitEvent = () => {
   emit('on-update', payload);
 };
 
+const onSelectChange = () => {
+  resetValues();
+};
+
+const onDateChange = () => {
+  validateDates();
+  dispatchCalendarEvent();
+};
+
 const options = computed(() => {
   return [...CALENDAR_TIME_UNITS, ...CALENDAR_DATE_UNITS].filter((option) =>
     props.allowedOptions.includes(option),
@@ -184,24 +190,6 @@ const showDateTo = computed(() => {
 const showNumericInput = computed(() => {
   return selectedOption.value ? CALENDAR_TIME_UNITS.includes(selectedOption.value) : false
 })
-
-watchEffect(() => {
-  if (showDateFrom.value || showDateTo.value) {
-    validateDates();
-  }
-});
-
-watch(selectedOption, () => {
-  resetValues();
-});
-
-// INFO: This is a workaround to prevent the event from being emitted when the component is resetting
-watch([numericValue, dateFrom, dateTo], () => {
-  if (!isResetting.value) {
-    emitEvent();
-  }
-});
-
 </script>
 
 <style scoped lang="scss">
