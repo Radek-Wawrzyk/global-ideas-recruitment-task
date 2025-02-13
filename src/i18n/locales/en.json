@@ -1,0 +1,14 @@
+{
+  "calendar": {
+    "select": {
+      "label": "Select pick range",
+      "placeholder": "Select an option"
+    },
+    "year": "Year",
+    "month": "Month",
+    "hour": "Hour",
+    "date-from-to": "Date from to",
+    "date-from": "Date from",
+    "date-to": "Date to"
+  }
+}

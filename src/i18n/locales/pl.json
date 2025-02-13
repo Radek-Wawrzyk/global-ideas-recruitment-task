@@ -1,0 +1,10 @@
+{
+  "calendar": {
+    "year": "Rok",
+    "month": "Miesiąc",
+    "hour": "Godzina",
+    "date-from-to": "Data od do",
+    "date-from": "Data od",
+    "date-to": "Data do"
+  }
+}
