@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import AppCalendar from '@/components/AppCalendar/AppCalendar.vue';
+import type { CalendarEvent } from '@/types';
 
+const handleCalendarUpdate = (event: CalendarEvent) => {
+  console.log(event);
+}
 </script>
 
 <template>
@@ -18,6 +22,7 @@ import AppCalendar from '@/components/AppCalendar/AppCalendar.vue';
         :allowed-options="['year', 'month', 'hour', 'date-from', 'date-to', 'date-from-to']"
         min-date="2025-01-01"
         max-date="2025-03-31"
+        @on-update="handleCalendarUpdate"
       />
     </section>
   </main>

@@ -1,8 +1,15 @@
 import type { CalendarOption } from './calendar.types'
 
-interface CalendarPayload {
-  type: CalendarOption
-  value: null | number | string | { dateFrom: string; dateTo: string }
+interface CalendarValue {
+  numericValue?: number
+  dateFrom?: string
+  dateTo?: string
 }
 
-export type { CalendarPayload }
+interface CalendarEvent {
+  type: CalendarOption
+  value: CalendarValue
+  hasError: boolean
+}
+
+export type { CalendarEvent, CalendarValue }

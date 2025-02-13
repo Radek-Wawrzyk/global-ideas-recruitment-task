@@ -53,13 +53,14 @@ import AppSelect from '@/components/common/AppSelect.vue';
 import AppInput from '@/components/common/AppInput.vue';
 import AppDatePicker from '@/components/common/AppDatePicker.vue';
 
-import type { CalendarOption } from '@/types'
+import type { CalendarOption, CalendarEvent } from '@/types'
 import { CALENDAR_TIME_UNITS, CALENDAR_DATE_UNITS } from '@/constants/calendar'
 import { ref, computed, watchEffect, watch } from 'vue'
 import { useI18n } from 'vue-i18n';
 
-// TODO: Define emits later
-// const emit = defineEmits(['on-update'])
+const emit = defineEmits<{
+  'on-update': [CalendarEvent]
+}>();
 
 const props = withDefaults(
   defineProps<{
@@ -127,11 +128,37 @@ const validateDates = () => {
 }
 
 const resetValues = () => {
+  numericValue.value = props.minValue || 1;
   dateFrom.value = '';
   dateTo.value = '';
   errors.value.dateFrom = false;
   errors.value.dateTo = false;
+  emitEvent();
 }
+
+const emitEvent = () => {
+  const payload: CalendarEvent = {
+    type: selectedOption.value,
+    value: {},
+    hasError: false
+  };
+
+  if (showNumericInput.value) {
+    payload.value.numericValue = numericValue.value;
+  }
+
+  if (showDateFrom.value) {
+    payload.value.dateFrom = dateFrom.value;
+    payload.hasError = errors.value.dateFrom;
+  }
+
+  if (showDateTo.value) {
+    payload.value.dateTo = dateTo.value;
+    payload.hasError = errors.value.dateTo;
+  }
+
+  emit('on-update', payload);
+};
 
 const options = computed(() => {
   return [...CALENDAR_TIME_UNITS, ...CALENDAR_DATE_UNITS].filter((option) =>
@@ -162,6 +189,10 @@ watchEffect(() => {
 
 watch(selectedOption, () => {
   resetValues();
+});
+
+watch([selectedOption, numericValue, dateFrom, dateTo, errors], () => {
+  emitEvent();
 });
 </script>
 
