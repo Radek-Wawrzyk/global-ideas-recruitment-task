@@ -4,6 +4,10 @@
       "label": "Select pick range",
       "placeholder": "Select an option"
     },
+    "numeric": {
+      "label": "Enter number of your choice",
+      "placeholder": "Enter your value"
+    },
     "year": "Year",
     "month": "Month",
     "hour": "Hour",

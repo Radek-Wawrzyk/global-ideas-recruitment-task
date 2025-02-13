@@ -12,7 +12,7 @@ import AppCalendar from '@/components/AppCalendar/AppCalendar.vue';
     </header>
 
     <section>
-      <app-calendar />
+      <app-calendar :min-value="1" :max-value="100" />
     </section>
   </main>
 </template>

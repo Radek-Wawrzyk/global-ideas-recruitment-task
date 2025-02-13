@@ -10,7 +10,14 @@
     </div>
 
     <div class="app-calendar__input" v-if="showNumericInput">
-      <app-input v-model="numericValue" :min="minValue" :max="maxValue" />
+      <app-input
+        v-model.number="numericValue"
+        :min="minValue"
+        :max="maxValue"
+        type="number"
+        :label="$t('calendar.numeric.label')"
+        :placeholder="$t('calendar.numeric.placeholder')"
+      />
     </div>
 
     <div class="app-calendar__date-from" v-if="showDateFrom">
@@ -52,9 +59,9 @@ const props = withDefaults(
 const t = useI18n();
 
 const selectedOption = ref<CalendarOption>('year')
-const numericValue = ref<number | null>();
+const numericValue = ref<number>(props.minValue || 1);
 // TODO: Define type & structure for data later
-// const data = ref(null)
+// const value = ref(null)
 
 const mapOptionToLabel = (option: CalendarOption) => {
   return t.t(`calendar.${option}`);

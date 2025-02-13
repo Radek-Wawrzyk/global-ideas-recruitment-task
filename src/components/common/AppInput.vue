@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 interface Props {
-  modelValue: string;
+  modelValue: string | number;
   label?: string;
   placeholder?: string;
   type?: string;
@@ -29,7 +29,7 @@ interface Props {
   max?: number;
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   type: 'text',
   disabled: false,
   placeholder: '',
@@ -37,12 +37,29 @@ withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
+  (e: 'update:modelValue', value: string | number): void;
 }>();
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement;
-  emit('update:modelValue', target.value);
+  let value: string | number = target.value;
+
+  if (props.type === 'number') {
+    const numValue = Number(value);
+
+    if (!isNaN(numValue)) {
+      if (props.min !== undefined && numValue < props.min) {
+        value = props.min;
+        target.value = props.min.toString();
+      }
+      if (props.max !== undefined && numValue > props.max) {
+        target.value = props.max.toString();
+        value = props.max;
+      }
+    }
+  }
+
+  emit('update:modelValue', value);
 };
 </script>
 
