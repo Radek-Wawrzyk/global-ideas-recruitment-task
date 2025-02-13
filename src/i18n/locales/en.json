@@ -8,6 +8,12 @@
       "label": "Enter number of your choice",
       "placeholder": "Enter your value"
     },
+    "date": {
+      "label": "Select date range",
+      "from": "Date from",
+      "to": "Date to",
+      "placeholder": "Select a date"
+    },
     "year": "Year",
     "month": "Month",
     "hour": "Hour",

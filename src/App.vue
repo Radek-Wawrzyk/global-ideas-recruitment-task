@@ -12,7 +12,13 @@ import AppCalendar from '@/components/AppCalendar/AppCalendar.vue';
     </header>
 
     <section>
-      <app-calendar :min-value="1" :max-value="100" />
+      <app-calendar
+        :min-value="1"
+        :max-value="100"
+        :allowed-options="['year', 'month', 'hour', 'date-from', 'date-to', 'date-from-to']"
+        min-date="2025-01-01"
+        max-date="2025-01-31"
+      />
     </section>
   </main>
 </template>

@@ -17,6 +17,8 @@
 </template>
 
 <script setup lang="ts">
+import { getUUID } from '@/helpers';
+
 interface Props {
   modelValue: string | number;
   label?: string;
@@ -33,7 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'text',
   disabled: false,
   placeholder: '',
-  id: '',
+  id: getUUID(),
 });
 
 const emit = defineEmits<{

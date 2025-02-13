@@ -21,11 +21,23 @@
     </div>
 
     <div class="app-calendar__date-from" v-if="showDateFrom">
-      Input type 'date' would be here (date-from)
+      <app-date-picker
+        v-model="dateFrom"
+        :label="$t('calendar.date.from')"
+        :placeholder="$t('calendar.date.from')"
+        :min="minDate"
+        :max="maxDate"
+      />
     </div>
 
     <div class="app-calendar__date-to" v-if="showDateTo">
-      Input type 'date' would be here (date-to)
+      <app-date-picker
+        v-model="dateTo"
+        :label="$t('calendar.date.to')"
+        :placeholder="$t('calendar.date.to')"
+        :min="minDate"
+        :max="maxDate"
+      />
     </div>
   </div>
 </template>
@@ -33,6 +45,7 @@
 <script setup lang="ts">
 import AppSelect from '@/components/common/AppSelect.vue';
 import AppInput from '@/components/common/AppInput.vue';
+import AppDatePicker from '@/components/common/AppDatePicker.vue';
 
 import type { CalendarOption } from '@/types'
 import { CALENDAR_TIME_UNITS, CALENDAR_DATE_UNITS } from '@/constants/calendar'
@@ -60,6 +73,9 @@ const t = useI18n();
 
 const selectedOption = ref<CalendarOption>('year')
 const numericValue = ref<number>(props.minValue || 1);
+const dateFrom = ref<string>('');
+const dateTo = ref<string>('');
+
 // TODO: Define type & structure for data later
 // const value = ref(null)
 
