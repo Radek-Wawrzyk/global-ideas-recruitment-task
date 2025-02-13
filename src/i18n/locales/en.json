@@ -12,7 +12,8 @@
       "label": "Select date range",
       "from": "Date from",
       "to": "Date to",
-      "placeholder": "Select a date"
+      "placeholder": "Select a date",
+      "error": "Invalid date"
     },
     "year": "Year",
     "month": "Month",

@@ -87,6 +87,7 @@ const handleInput = (event: Event) => {
 
     &:focus {
       border-color: var(--state-focus);
+      box-shadow: 0 0 0 2px var(--state-focus-light);
     }
 
     &:disabled {

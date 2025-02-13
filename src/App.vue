@@ -17,7 +17,7 @@ import AppCalendar from '@/components/AppCalendar/AppCalendar.vue';
         :max-value="100"
         :allowed-options="['year', 'month', 'hour', 'date-from', 'date-to', 'date-from-to']"
         min-date="2025-01-01"
-        max-date="2025-01-31"
+        max-date="2025-03-31"
       />
     </section>
   </main>
