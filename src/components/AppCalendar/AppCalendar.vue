@@ -55,7 +55,7 @@ import AppDatePicker from '@/components/common/AppDatePicker.vue';
 
 import type { CalendarOption } from '@/types'
 import { CALENDAR_TIME_UNITS, CALENDAR_DATE_UNITS } from '@/constants/calendar'
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, watchEffect, watch } from 'vue'
 import { useI18n } from 'vue-i18n';
 
 // TODO: Define emits later
@@ -126,6 +126,13 @@ const validateDates = () => {
   }
 }
 
+const resetValues = () => {
+  dateFrom.value = '';
+  dateTo.value = '';
+  errors.value.dateFrom = false;
+  errors.value.dateTo = false;
+}
+
 const options = computed(() => {
   return [...CALENDAR_TIME_UNITS, ...CALENDAR_DATE_UNITS].filter((option) =>
     props.allowedOptions.includes(option),
@@ -151,6 +158,10 @@ watchEffect(() => {
   if (showDateFrom.value || showDateTo.value) {
     validateDates();
   }
+});
+
+watch(selectedOption, () => {
+  resetValues();
 });
 </script>
 
