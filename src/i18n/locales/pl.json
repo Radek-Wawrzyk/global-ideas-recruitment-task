@@ -1,0 +1,30 @@
+{
+  "common": {
+    "header": "Zadanie rekrutacyjne Global Ideas"
+  },
+  "calendar": {
+    "select": {
+      "label": "Wybierz zakres",
+      "placeholder": "Wybierz opcję"
+    },
+    "numeric": {
+      "label": "Wprowadź liczbę swojego wyboru",
+      "placeholder": "Wprowadź swoją wartość"
+    },
+    "date": {
+      "label": "Wybierz zakres dat",
+      "from": "Data od",
+      "to": "Data do",
+      "placeholder": "Wybierz datę",
+      "error": "Nieprawidłowa data"
+    },
+    "year": "Rok",
+    "quarter": "Kwartał",
+    "month": "Miesiąc",
+    "hour": "Godzina",
+    "minute": "Minuta",
+    "date-from-to": "Data od do",
+    "date-from": "Data od",
+    "date-to": "Data do"
+  }
+}

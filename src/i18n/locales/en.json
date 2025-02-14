@@ -1,0 +1,30 @@
+{
+  "common": {
+    "header": "Global Ideas recruitment task"
+  },
+  "calendar": {
+    "select": {
+      "label": "Select pick range",
+      "placeholder": "Select an option"
+    },
+    "numeric": {
+      "label": "Enter number of your choice",
+      "placeholder": "Enter your value"
+    },
+    "date": {
+      "label": "Select date range",
+      "from": "Date from",
+      "to": "Date to",
+      "placeholder": "Select a date",
+      "error": "Invalid date"
+    },
+    "year": "Year",
+    "quarter": "Quarter",
+    "month": "Month",
+    "hour": "Hour",
+    "minute": "Minute",
+    "date-from-to": "Date from to",
+    "date-from": "Date from",
+    "date-to": "Date to"
+  }
+}
