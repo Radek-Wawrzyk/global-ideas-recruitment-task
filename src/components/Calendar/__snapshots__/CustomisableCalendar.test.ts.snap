@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CustomisableCalendar > Rendering the component > should initially render AppSelect 1`] = `
+"<div data-v-16f9b3f5="" class="app-calendar__select">
+  <div data-v-16f9b3f5="" class="mock-select" modelvalue="year" options="[object Object],[object Object],[object Object],[object Object]" label="calendar.select.label" placeholder="calendar.select.placeholder"></div>
+</div>"
+`;
+
+exports[`CustomisableCalendar component > Rendering the component > should initially render AppSelect 1`] = `
+"<div data-v-16f9b3f5="" class="app-calendar__select">
+  <div data-v-16f9b3f5="" class="mock-select" modelvalue="year" options="[object Object],[object Object],[object Object],[object Object]" label="calendar.select.label" placeholder="calendar.select.placeholder"></div>
+</div>"
+`;
+
+exports[`CustomisableCalendar component > Rendering the component > should initiallyrender AppSelect 1`] = `
+"<div data-v-16f9b3f5="" class="app-calendar__select">
+  <div data-v-16f9b3f5="" class="mock-select" modelvalue="year" options="[object Object],[object Object],[object Object],[object Object]" label="calendar.select.label" placeholder="calendar.select.placeholder"></div>
+</div>"
+`;
