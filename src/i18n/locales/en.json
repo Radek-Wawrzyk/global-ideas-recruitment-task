@@ -1,4 +1,7 @@
 {
+  "common": {
+    "header": "Global Ideas recruitment task"
+  },
   "calendar": {
     "select": {
       "label": "Select pick range",
@@ -16,8 +19,10 @@
       "error": "Invalid date"
     },
     "year": "Year",
+    "quarter": "Quarter",
     "month": "Month",
     "hour": "Hour",
+    "minute": "Minute",
     "date-from-to": "Date from to",
     "date-from": "Date from",
     "date-to": "Date to"

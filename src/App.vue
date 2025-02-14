@@ -15,7 +15,7 @@ const handleCalendarUpdate = (event: CalendarEvent) => {
   <main class="app">
     <header class="app__header">
       <h1 class="app__header-title">
-        Global Ideas recruitment task
+        {{ $t('common.header') }}
       </h1>
     </header>
 
@@ -23,7 +23,8 @@ const handleCalendarUpdate = (event: CalendarEvent) => {
       <customisable-calendar
         :min-value="1"
         :max-value="100"
-        :allowed-options="['year', 'month', 'hour', 'date-from', 'date-to', 'date-from-to']"
+        :allowed-options="['year', 'quarter', 'month', 'minute', 'hour', 'date-from', 'date-to', 'date-from-to']"
+        :disabled-options="['year', 'minute', 'date-to']"
         min-date="2025-01-01"
         max-date="2025-03-31"
         @on-update="handleCalendarUpdate"

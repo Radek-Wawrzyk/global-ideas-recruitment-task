@@ -74,6 +74,7 @@ const props = withDefaults(
   }>(),
   {
     allowedOptions: () => ['year', 'month', 'hour', 'date-from-to'],
+    disabledOptions: () => [],
   },
 )
 
@@ -173,6 +174,7 @@ const options = computed(() => {
   ).map((option) => ({
     value: option,
     label: mapOptionToLabel(option),
+    disabled: props.disabledOptions?.includes(option) || false
   }));
 })
 

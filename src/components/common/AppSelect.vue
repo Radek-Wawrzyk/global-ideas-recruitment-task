@@ -13,6 +13,7 @@
         v-for="option in options"
         :key="option.value"
         :value="option.value"
+        :disabled="option.disabled"
       >
         {{ option.label }}
       </option>
@@ -27,6 +28,7 @@ import { getUUID } from '@/helpers';
 interface Option {
   value: string | number;
   label: string;
+  disabled?: boolean;
 }
 
 interface Props {
