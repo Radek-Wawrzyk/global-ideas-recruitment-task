@@ -77,19 +77,10 @@ const handleInput = (event: Event) => {
   value = value.replace(/[^\d-]/g, '');
   const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 
-  if (dateRegex.test(value)) {
-    const [year, month, day] = value.split('-').map(Number);
-    const date = new Date(year, month - 1, day);
-
-    if (
-      date.getFullYear() === year &&
-      date.getMonth() === month - 1 &&
-      date.getDate() === day
-    ) {
-      emit('update:modelValue', value);
-    }
-  } else if (value === '') {
+  if (value === '') {
     emit('update:modelValue', '');
+  } else if (dateRegex.test(value)) {
+    emit('update:modelValue', value);
   }
 }
 

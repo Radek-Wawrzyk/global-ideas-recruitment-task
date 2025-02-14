@@ -101,32 +101,34 @@ const validateDates = () => {
 
   if (!dateFrom.value && !dateTo.value) return;
 
-  const fromDate = dateFrom.value ? new Date(dateFrom.value) : null;
-  const toDate = dateTo.value ? new Date(dateTo.value) : null;
-  const minDateObj = props.minDate ? new Date(props.minDate) : null;
-  const maxDateObj = props.maxDate ? new Date(props.maxDate) : null;
+  const isValidDateFormat = (dateStr: string) => {
+    const regex = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/;
+    return regex.test(dateStr);
+  };
 
-  if (fromDate) {
+  if (dateFrom.value) {
+    const fromDate = new Date(dateFrom.value);
     if (
+      !isValidDateFormat(dateFrom.value) ||
       isNaN(fromDate.getTime()) ||
-      (minDateObj && fromDate < minDateObj) ||
-      (maxDateObj && fromDate > maxDateObj)
+      (props.minDate && fromDate < new Date(props.minDate)) ||
+      (props.maxDate && fromDate > new Date(props.maxDate))
     ) {
       errors.value.dateFrom = true;
     }
   }
 
-  if (toDate) {
+  if (dateTo.value) {
+    const toDate = new Date(dateTo.value);
     if (
+      !isValidDateFormat(dateTo.value) ||
       isNaN(toDate.getTime()) ||
-      (minDateObj && toDate < minDateObj) ||
-      (maxDateObj && toDate > maxDateObj)
+      (props.minDate && toDate < new Date(props.minDate)) ||
+      (props.maxDate && toDate > new Date(props.maxDate))
     ) {
       errors.value.dateTo = true;
     }
   }
-
-  return errors.value;
 }
 
 const resetValues = () => {
@@ -148,14 +150,17 @@ const dispatchCalendarEvent = () => {
     payload.value.numericValue = numericValue.value;
   }
 
+  if (showDateFrom.value || showDateTo.value) {
+    validateDates();
+    payload.hasError = errors.value.dateFrom || errors.value.dateTo;
+  }
+
   if (showDateFrom.value) {
     payload.value.dateFrom = dateFrom.value;
-    payload.hasError = errors.value.dateFrom;
   }
 
   if (showDateTo.value) {
     payload.value.dateTo = dateTo.value;
-    payload.hasError = errors.value.dateTo;
   }
 
   emit('on-update', payload);
