@@ -1,5 +1,8 @@
 # Global Ideas Recruitment task
 
+![image](https://github.com/user-attachments/assets/74a2584d-b29f-4157-ac64-654d52d38446)
+
+
 ## Application Architecture
 From the very beginning of the project, I considered the potential need for future maintenance beyond the initial assignment. Therefore, I set up a basic configuration for global styles using SCSS and structured the project with dedicated directories for types, helpers, and i18n. While the application does not feature a language switcher, this setup would facilitate easier refactoring and future enhancements.
 
