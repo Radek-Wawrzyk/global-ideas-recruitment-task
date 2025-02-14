@@ -45,10 +45,6 @@
         @update:model-value="onDateChange"
       />
     </div>
-
-    <div>
-      {{ dateFrom }} - {{ dateTo }}
-    </div>
   </div>
 </template>
 
@@ -61,10 +57,11 @@ import type { CalendarOption, CalendarEvent } from '@/types'
 import { CALENDAR_TIME_UNITS, CALENDAR_DATE_UNITS } from '@/constants/calendar'
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n';
+import { isValidDateFormat } from '@/helpers';
 
 const emit = defineEmits<{
-  'on-update': [CalendarEvent]
-}>();
+  (eventName: 'on-update', payload: CalendarEvent): void
+}>()
 
 const props = withDefaults(
   defineProps<{
@@ -100,11 +97,6 @@ const validateDates = () => {
   errors.value.dateTo = false;
 
   if (!dateFrom.value && !dateTo.value) return;
-
-  const isValidDateFormat = (dateStr: string) => {
-    const regex = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/;
-    return regex.test(dateStr);
-  };
 
   if (dateFrom.value) {
     const fromDate = new Date(dateFrom.value);

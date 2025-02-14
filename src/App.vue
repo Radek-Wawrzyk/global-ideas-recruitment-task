@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import AppCalendar from '@/components/AppCalendar/AppCalendar.vue';
+import CustomisableCalendar from '@/components/Calendar/CustomisableCalendar.vue';
+import { ref } from 'vue';
 import type { CalendarEvent } from '@/types';
+
+const calendarOutput = ref<CalendarEvent>();
 
 const handleCalendarUpdate = (event: CalendarEvent) => {
   console.log(event);
+  calendarOutput.value = event;
 }
 </script>
 
@@ -16,7 +20,7 @@ const handleCalendarUpdate = (event: CalendarEvent) => {
     </header>
 
     <section>
-      <app-calendar
+      <customisable-calendar
         :min-value="1"
         :max-value="100"
         :allowed-options="['year', 'month', 'hour', 'date-from', 'date-to', 'date-from-to']"
@@ -25,6 +29,10 @@ const handleCalendarUpdate = (event: CalendarEvent) => {
         @on-update="handleCalendarUpdate"
       />
     </section>
+
+    <section>
+      <pre>{{ calendarOutput }}</pre>
+    </section>
   </main>
 </template>
 
@@ -32,6 +40,10 @@ const handleCalendarUpdate = (event: CalendarEvent) => {
 .app {
   margin: 120px auto;
   width: 320px;
+
+  section {
+    margin: 0 0 32px 0;
+  }
 
   &__header {
     &-title {
